@@ -27,13 +27,16 @@ fi
     -u NONE \
     /dev/shm/privim
 
-shopt -s extglob
-for f in "$file".*([0-9])
-do
-    bn="$(basename "$f")"
-    mv "$f" "$file.$((${bn##*.}+1))"
-done
-mv "$file" "$file.0"
+if [ -f "$file" ]
+then
+    shopt -s extglob
+    for f in "$file".*([0-9])
+    do
+        bn="$(basename "$f")"
+        mv "$f" "$file.$((${bn##*.}+1))"
+    done
+    mv "$file" "$file.0"
+fi
 
 gpg -r "$key" -o "$file" -e /dev/shm/privim
 
