@@ -17,14 +17,22 @@
 shopt -s extglob
 echo -ne '\e[1004h'
 
+. "$HOME/.privim"
+if [ -z "$nvimflags" ]
+then
+    # extremely ugly hack
+    nvimflags=(+)
+fi
+
 if [ -f "$file" ]
 then
     gpg -r "$key" -o /dev/shm/privim -d "$file" || exit 1
 fi
 
-"$nvim" \
+VIM="$VIM" "$nvim" \
     '+set noswapfile viminfo= updatetime=10000' \
     '+au FocusLost,CursorHold,CursorHoldI * wq' \
+    "${nvimflags[@]}" \
     /dev/shm/privim
 
 if [ -n "$rotate" -a -f "$file" ]

@@ -40,5 +40,8 @@ Other configuration options include:
   `foo`) exists, it will move the old `foo` to `foo.0`, the old `foo.0` to
   `foo.1`, and so on, and your new version will be saved as `foo`.
 
+* **`nvimflags`**: this is an array of flags to pass to the `nvim` command. Use
+  `declare -a nvimflags=('-a' '-b' '-c')` in `~/.privim` to set this.
+
 Note: `privim` is still in a very early stage of development, so a lot of
 options that should really be configurable aren't yet.
