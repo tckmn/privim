@@ -17,7 +17,7 @@
 echo -ne '\e[1004h'
 if [ -f "$file" ]
 then
-    gpg -r "$key" -o /dev/shm/privim -d "$file"
+    gpg -r "$key" -o /dev/shm/privim -d "$file" || exit 1
 fi
 "$nvim" \
     '+set noswapfile viminfo= updatetime=10000' \
