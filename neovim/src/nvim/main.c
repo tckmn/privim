@@ -6,6 +6,9 @@
 
 #include <msgpack.h>
 
+// Provides mlockall().  -- KF
+#include <sys/mman.h>
+
 #include "nvim/ascii.h"
 #include "nvim/vim.h"
 #include "nvim/main.h"
@@ -218,6 +221,9 @@ int nvim_main(int argc, char **argv)
 int main(int argc, char **argv)
 #endif
 {
+  // Prevent swapping.  -- KF
+  mlockall(MCL_CURRENT | MCL_FUTURE);
+
   argv0 = (char *)path_tail((char_u *)argv[0]);
 
   char_u *fname = NULL;   // file name from command line
