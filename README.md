@@ -17,7 +17,7 @@ private files, such as a personal journal. It has the following features:
 
 To use `privim`,
 
-    git clone --recursive https://github.com/KeyboardFire/privim.git
+    git clone https://github.com/KeyboardFire/privim.git
     cd neovim
     make
     cd ~/bin  # or wherever
