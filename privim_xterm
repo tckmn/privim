@@ -15,15 +15,27 @@
 # limitations under the License.
 
 echo -ne '\e[1004h'
+
 if [ -f "$file" ]
 then
     gpg -r "$key" -o /dev/shm/privim -d "$file" || exit 1
 fi
+
 "$nvim" \
     '+set noswapfile viminfo= updatetime=10000' \
     '+au FocusLost,CursorHold,CursorHoldI * wq' \
     -u NONE \
     /dev/shm/privim
+
+shopt -s extglob
+for f in "$file".*([0-9])
+do
+    bn="$(basename "$f")"
+    mv "$f" "$file.$((${bn##*.}+1))"
+done
+mv "$file" "$file.0"
+
 gpg -r "$key" -o "$file" -e /dev/shm/privim
+
 rm /dev/shm/privim
 pgrep gpg-agent && killall -s HUP gpg-agent
