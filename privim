@@ -20,7 +20,7 @@ then
     exit 1
 fi
 
-read key <~/.privim
+source "$HOME/.privim"
 base="$(dirname "$(realpath "$0")")"
-export key="$key" file="$1" nvim="$base/neovim/build/bin/nvim"
-xterm -e "$base/privim_xterm"
+
+key="$key" file="$1" nvim="$base/neovim/build/bin/nvim" rotate="$rotate" xterm -e "$base/privim_xterm"

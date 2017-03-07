@@ -14,6 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+shopt -s extglob
 echo -ne '\e[1004h'
 
 if [ -f "$file" ]
@@ -27,10 +28,9 @@ fi
     -u NONE \
     /dev/shm/privim
 
-if [ -f "$file" ]
+if [ -n "$rotate" -a -f "$file" ]
 then
-    shopt -s extglob
-    for f in "$file".*([0-9])
+    ls "$file".*([0-9]) | sort -Vr | while read f
     do
         bn="$(basename "$f")"
         mv "$f" "$file.$((${bn##*.}+1))"

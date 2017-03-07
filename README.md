@@ -1,6 +1,6 @@
 # privim
 
-`privim` is a very lightly modified fork of Neovim geared towards editing
+**`privim`** is a very lightly modified fork of Neovim geared towards editing
 private files, such as a personal journal. It has the following features:
 
 * decrypts GPG-encrypted files into /dev/shm before editing and re-encrypts
@@ -27,12 +27,18 @@ The symlink should point to the `privim` binary in the root of this project.
 
 Also make sure that you
 
-    echo 'foo@bar.baz' > ~/.privim
+    echo 'key=foo@bar.baz' > ~/.privim
 
-`privim` will read this file to determine which gpg key to use.
+`privim` will read this file to determine which gpg key to use. You can then
+simply run `privim filename`, which will create `filename` if it doesn't exist
+already.
 
-You can then simply run `privim filename`, which will create `filename` if it
-doesn't exist already.
+Other configuration options include:
+
+* **`rotate`**: if this is set to anything other than the empty string,
+  `privim` will "rotate" versions of your file. If the file being edited (say,
+  `foo`) exists, it will move the old `foo` to `foo.0`, the old `foo.0` to
+  `foo.1`, and so on, and your new version will be saved as `foo`.
 
 Note: `privim` is still in a very early stage of development, so a lot of
 options that should really be configurable aren't yet.
