@@ -43,5 +43,6 @@ Other configuration options include:
 * **`nvimflags`**: this is an array of flags to pass to the `nvim` command. Use
   `declare -a nvimflags=('-a' '-b' '-c')` in `~/.privim` to set this.
 
-Note: `privim` is still in a very early stage of development, so a lot of
-options that should really be configurable aren't yet.
+* **`idletime`**: amount of time in milliseconds of user inactivity to wait
+  before automatically `:wq`ing. If unspecified, the default is `10000`, as
+  mentioned above.
