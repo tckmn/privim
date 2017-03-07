@@ -23,4 +23,4 @@ fi
 source "$HOME/.privim"
 base="$(dirname "$(realpath "$0")")"
 
-key="$key" file="$1" nvim="$base/neovim/build/bin/nvim" rotate="$rotate" xterm -e "$base/privim_xterm"
+key="$key" file="$1" nvim="$base/neovim/build/bin/nvim" rotate="$rotate" VIM="$VIM" xterm -e "$base/privim_xterm"

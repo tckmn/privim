@@ -25,7 +25,6 @@ fi
 "$nvim" \
     '+set noswapfile viminfo= updatetime=10000' \
     '+au FocusLost,CursorHold,CursorHoldI * wq' \
-    -u NONE \
     /dev/shm/privim
 
 if [ -n "$rotate" -a -f "$file" ]
