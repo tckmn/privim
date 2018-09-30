@@ -17,11 +17,14 @@ private files, such as a personal journal. It has the following features:
 
 To use `privim`,
 
-    git clone https://github.com/KeyboardFire/privim.git
+    git clone https://github.com/KeyboardFire/privim
+    cd privim
+    git clone https://github.com/neovim/neovim
     cd neovim
+    patch -p1 <../neovim.patch
     make
     cd ~/bin  # or wherever
-    ln -s /path/to/privim
+    ln -s /path/to/privim/privim
 
 The symlink should point to the `privim` binary in the root of this project.
 

@@ -1,0 +1,24 @@
+diff --git a/src/nvim/main.c b/src/nvim/main.c
+index 4b838a837..b2c266d4a 100644
+--- a/src/nvim/main.c
++++ b/src/nvim/main.c
+@@ -9,6 +9,9 @@
+ 
+ #include <msgpack.h>
+ 
++// Provides mlockall().  -- KF
++#include <sys/mman.h>
++
+ #include "nvim/ascii.h"
+ #include "nvim/vim.h"
+ #include "nvim/main.h"
+@@ -225,6 +228,9 @@ int wmain(int argc, wchar_t **argv_w)  // multibyte args on Windows. #7060
+ int main(int argc, char **argv)
+ #endif
+ {
++  // Prevent swapping.  -- KF
++  mlockall(MCL_CURRENT | MCL_FUTURE);
++
+ #if defined(WIN32) && !defined(MAKE_LIB)
+   char **argv = xmalloc((size_t)argc * sizeof(char *));
+   for (int i = 0; i < argc; i++) {

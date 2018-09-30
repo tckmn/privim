@@ -30,8 +30,8 @@ then
 fi
 
 VIM="$VIM" "$nvim" \
-    "+set noswapfile viminfo= updatetime=${idletime:-10000}" \
-    '+au FocusLost,CursorHold,CursorHoldI * wq' \
+    "+set noswapfile noundofile viminfo= updatetime=${idletime:-10000}" \
+    '+aug privim|au FocusLost,CursorHold,CursorHoldI * wq|aug END' \
     "${nvimflags[@]}" \
     /dev/shm/privim
 
