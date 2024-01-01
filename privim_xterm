@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Copyright 2017 KeyboardFire <andy@keyboardfire.com>
 #
@@ -31,7 +31,7 @@ fi
 
 VIM="$VIM" "$nvim" \
     "+set noswapfile noundofile viminfo= updatetime=${idletime:-10000}" \
-    '+aug privim|au FocusLost,CursorHold,CursorHoldI * wq|aug END' \
+    +"$([ -n "$idletime" ] && echo 'aug privim|au FocusLost,CursorHold,CursorHoldI * wq|aug END')" \
     "${nvimflags[@]}" \
     /dev/shm/privim
 
@@ -48,4 +48,7 @@ fi
 gpg -r "$key" -o "$file" -e /dev/shm/privim
 
 rm /dev/shm/privim
-pgrep gpg-agent && killall -s HUP gpg-agent
+if [ -n "$killgpg" ]
+then
+    pgrep gpg-agent && killall -s HUP gpg-agent
+fi
